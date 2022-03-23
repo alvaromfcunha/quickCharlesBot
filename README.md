@@ -12,5 +12,5 @@ npm run build
 ```
 - Run the application.
 ```
-node app.js
+npm run start
 ```
