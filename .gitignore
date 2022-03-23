@@ -105,3 +105,6 @@ dist
 
 # Wpp auth
 auth_info_multi.json
+
+# Build files
+*.js
