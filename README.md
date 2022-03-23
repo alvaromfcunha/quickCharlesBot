@@ -1,4 +1,4 @@
-# quickCharlesBot
+# Quick Charles Bot - Whatsapp
 Simple whatsapp chatbot based on Baileys.
 
 ## Setup
