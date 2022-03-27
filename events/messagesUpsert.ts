@@ -1,4 +1,4 @@
-import { MessageUpdateType, WAMessage, WASocket } from "@adiwajshing/baileys"
+import { MessageUpdateType, WAMessage, WASocket } from "@adiwajshing/baileys" 
 import commandHandler from "../handlers/commandHandler"
 
 const messagesUpsert = (sock: WASocket) => m => {
