@@ -5,6 +5,36 @@ class SimpleMessageContext {
   command: string
 }
 
+const commandHandler = (msg: WAMessage): AnyRegularMessageContent => {
+  const parsedMessage: SimpleMessageContext = parseMessage(msg)
+
+  if(parsedMessage) {
+    const command: string = parsedMessage.command
+    const msgType: string = parsedMessage.msgType
+  
+    switch(command) {
+
+      // Lista de Comandos:
+
+      case 'teste':
+        return {
+          text: `Quick Charles type: ${msgType}` 
+        }
+
+      // Cabo os comandos.
+      
+      default:
+        return {
+          text: 'Comando não encontrado!'
+        }
+    }
+  } else {
+    return {
+      text: 'Tipo de mensagem nao supotada!'
+    }
+  }
+}
+
 const parseMessage = (msg: WAMessage): SimpleMessageContext | undefined => {
   if(msg.message.conversation) {
     const text = msg.message.conversation
@@ -33,38 +63,6 @@ const parseCommand = (text: string): string => {
   const pattern = /!(\w+)/g
   const matches = pattern.exec(text)
   return matches ? matches[1] : ''
-}
-
-const commandHandler = (msg: WAMessage): AnyRegularMessageContent => {
-  const parsedMessage: SimpleMessageContext = parseMessage(msg)
-
-  console.log('\n[commandHandler]', 'parsedMessage:', parsedMessage)
-
-  if(parsedMessage) {
-    const command: string = parsedMessage.command
-    const msgType: string = parsedMessage.msgType
-  
-    switch(command) {
-
-      // Lista de Comandos:
-
-      case 'teste':
-        return {
-          text: `Quick Charles type: ${msgType}` 
-        }
-
-      // Cabo os comandos.
-      
-      default:
-        return {
-          text: 'Comando não encontrado!'
-        }
-    }
-  } else {
-    return {
-      text: 'Tipo de mensagem nao supotada!'
-    }
-  }
 }
 
 export {commandHandler as default}
