@@ -1,4 +1,4 @@
-import { AnyRegularMessageContent, WAMessage } from "@adiwajshing/baileys"
+import { AnyMessageContent, WAMessage } from "@adiwajshing/baileys"
 
 import coffeeCommand from "../commands/coffee"
 import goodMorningCommand from "../commands/goodMorning"
@@ -8,7 +8,7 @@ class SimpleMessageContext {
   command: string
 }
 
-const commandHandler = (msg: WAMessage, isGroup: boolean): AnyRegularMessageContent => {
+const commandHandler = (msg: WAMessage, isGroup: boolean): AnyMessageContent => {
   const parsedMessage: SimpleMessageContext = parseMessage(msg)
 
   console.log('\n[commandHandler]', 'parsedMessage:', parsedMessage)
@@ -21,14 +21,10 @@ const commandHandler = (msg: WAMessage, isGroup: boolean): AnyRegularMessageCont
 
       // Lista de Comandos:
 
-      case 'dia': 
-        return {
-          text: goodMorningCommand()
-        }
+      case 'dia':
+        return goodMorningCommand()
       case 'cafe':
-        return {
-          text: coffeeCommand()
-        }
+        return coffeeCommand()
       case 'teste_mensagem':
         return {
           text: `msg type: ${msgType}` 
@@ -61,7 +57,7 @@ const parseMessage = (msg: WAMessage): SimpleMessageContext | undefined => {
       msgType: 'text',
       command: parseCommand(text)
     }
-  } else if(msg.message.imageMessage) { // Nao cai aqui quando eh grupo. ARRUMAR isBotMentioned no messagesUpsert.
+  } else if(msg.message.imageMessage) {
     const text = msg.message.imageMessage.caption
     return {
       msgType: 'image',
