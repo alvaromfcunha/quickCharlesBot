@@ -32,12 +32,12 @@ const sendBotMessage = (sock: WASocket, msg: WAMessage, senderJid: string, isGro
   sock.sendPresenceUpdate('available', senderJid)
   sock.sendReadReceipt(senderJid, msg.key.participant, [msg.key.id])
   sock.sendPresenceUpdate('composing', senderJid)
-  setTimeout(() => {
-    sock.sendPresenceUpdate('paused', senderJid)
-    sock.sendMessage(senderJid, commandHandler(msg, isGroup), {
+  commandHandler(msg, isGroup).then(msgToSend => {
+    sock.sendMessage(senderJid, msgToSend, {
       quoted: isGroup ? msg : undefined
     })
-  }, composingDelayMs)
+  })
+  
 }
 
 const getMentionedJidArr = (msg: WAMessage): string[] | undefined => {
