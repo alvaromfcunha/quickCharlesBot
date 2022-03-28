@@ -108,3 +108,6 @@ auth_info_multi.json
 
 # Build files
 *.js
+
+# Lock file
+package-lock.json
