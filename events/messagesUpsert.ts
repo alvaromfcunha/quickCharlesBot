@@ -41,7 +41,11 @@ const sendBotMessage = (sock: WASocket, msg: WAMessage, senderJid: string, isGro
 }
 
 const getMentionedJidArr = (msg: WAMessage): string[] | undefined => {
-  return msg.message?.extendedTextMessage?.contextInfo?.mentionedJid
+  if(msg.message.extendedTextMessage) {
+    return msg.message.extendedTextMessage.contextInfo.mentionedJid
+  } else if(msg.message.imageMessage) {
+    return msg.message.imageMessage.contextInfo.mentionedJid
+  }
 }
 
 const isGroup = (jid: string): boolean => jid.includes('@g.us')

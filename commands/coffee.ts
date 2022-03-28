@@ -1,4 +1,6 @@
-const coffeeCommand = (): string => {
+import { AnyMessageContent } from "@adiwajshing/baileys"
+
+const coffeeCommand = (): AnyMessageContent => {
 	const now: Date = new Date()
   const timezone: number = 3
 	
@@ -10,14 +12,20 @@ const coffeeCommand = (): string => {
 		hours += 24
   }
 
+  let text = 'placeholder'
+
 	if(hours < 10) {
-    return `Falta ${9 - hours}:${59 - min}:${60 - sec} pro café, nerdola.`
+    text = `Falta ${9 - hours}:${59 - min}:${60 - sec} pro café, nerdola.`
   } else if(min >= 30 && hours < 15) {
-    return `${14 - hours}:${89 - min}:${60 - sec} pro próximo cafezin.`
+    text = `${14 - hours}:${89 - min}:${60 - sec} pro próximo cafezin.`
   } else if(min < 30 && hours <= 15) {
-    return `Exatos ${15 - hours}:${29 - min}:${60 - sec} pra passar vergonha com o Poulo no café.`
+    text = `Exatos ${15 - hours}:${29 - min}:${60 - sec} pra passar vergonha com o Poulo no café.`
   } else {
-    return `Daqui ${33 - hours}:${59 - min}:${60 - sec} tem coffer.`
+    text = `Daqui ${33 - hours}:${59 - min}:${60 - sec} tem coffer.`
+  }
+
+  return {
+    text: text
   }
 }
 

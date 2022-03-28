@@ -1,4 +1,4 @@
-import { AnyMessageContent, AnyRegularMessageContent, WAMessage } from "@adiwajshing/baileys"
+import { AnyMessageContent, WAMessage } from "@adiwajshing/baileys"
 
 import {randomImage, coffeeCommand, goodMorningCommand} from "../commands/index"
 
@@ -22,9 +22,7 @@ const commandHandler = async (msg: WAMessage, isGroup: boolean): Promise<AnyMess
         // Lista de Comandos:
   
         case 'dia': 
-         resolve({
-            text: goodMorningCommand()
-          })
+         resolve(goodMorningCommand())
           break
   
         case 'cavalo':
@@ -37,9 +35,7 @@ const commandHandler = async (msg: WAMessage, isGroup: boolean): Promise<AnyMess
           break
         
         case 'cafe':
-          resolve({
-            text: coffeeCommand()
-          })
+          resolve(coffeeCommand())
           break
 
         case 'teste_mensagem':
@@ -78,7 +74,7 @@ const parseMessage = (msg: WAMessage): SimpleMessageContext | undefined => {
       msgType: 'text',
       command: parseCommand(text)
     }
-  } else if(msg.message.imageMessage) { // Nao cai aqui quando eh grupo. ARRUMAR isBotMentioned no messagesUpsert.
+  } else if(msg.message.imageMessage) {
     const text = msg.message.imageMessage.caption
     return {
       msgType: 'image',

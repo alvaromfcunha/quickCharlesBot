@@ -1,16 +1,24 @@
-const goodMorningCommand = (): string => {
+import { AnyMessageContent } from "@adiwajshing/baileys"
+
+const goodMorningCommand = (): AnyMessageContent => {
 	const now: Date = new Date()
   const timezone: number = 3
 	const hours: number = now.getHours() - timezone
 
+  let text = 'placeholder'
+
   if(hours >= 0 && hours <= 6) {
-    return 'Coé, vai dormir corno.'
+    text = 'Coé, vai dormir corno.'
   } else if(hours <= 12) {
-    return 'Bom dia.'
+    text = 'Bom dia.'
   } else if(hours <= 18) {
-    return 'Boa tarde.'
+    text = 'Boa tarde.'
   } else {
-    return 'Ba noit.'
+    text = 'Ba noit.'
+  }
+
+  return {
+    text: text
   }
 }
 
