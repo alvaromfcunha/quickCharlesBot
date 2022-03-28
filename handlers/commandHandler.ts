@@ -1,12 +1,17 @@
 import { AnyRegularMessageContent, WAMessage } from "@adiwajshing/baileys"
 
+import coffeeCommand from "../commands/coffee"
+import goodMorningCommand from "../commands/goodMorning"
+
 class SimpleMessageContext {
   msgType: string
   command: string
 }
 
-const commandHandler = (msg: WAMessage): AnyRegularMessageContent => {
+const commandHandler = (msg: WAMessage, isGroup: boolean): AnyRegularMessageContent => {
   const parsedMessage: SimpleMessageContext = parseMessage(msg)
+
+  console.log('\n[commandHandler]', 'parsedMessage:', parsedMessage)
 
   if(parsedMessage) {
     const command: string = parsedMessage.command
@@ -16,9 +21,17 @@ const commandHandler = (msg: WAMessage): AnyRegularMessageContent => {
 
       // Lista de Comandos:
 
-      case 'teste':
+      case 'dia': 
         return {
-          text: `Quick Charles type: ${msgType}` 
+          text: goodMorningCommand()
+        }
+      case 'cafe':
+        return {
+          text: coffeeCommand()
+        }
+      case 'teste_mensagem':
+        return {
+          text: `msg type: ${msgType}` 
         }
 
       // Cabo os comandos.
